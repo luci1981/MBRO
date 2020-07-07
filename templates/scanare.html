@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Scanare NIR
+{% endblock title %}
+
+{% block content %}
+    <br>
+    <div class="jumbotron">
+        <h2 style="text-align: center">Scanare NIR {{ fila.split('_')[1] }}</h2>
+        <br>
+        {% if mesaj %}
+            <h4 style="text-align: center;">{{ mesaj }}</h4>
+        {% else %}
+            <br>
+        {% endif %}
+        <form class="form-inline justify-content-center" action="{{ url_for('scanare', fila=fila) }}" method="POST">
+            <label class="sr-only" for="inlineFormInputName2">Cod OE</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Cod OE" name="codoe">
+            <label class="sr-only" for="inlineFormInputGroupUsername2">Eticheta SAP</label>
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Eticheta SAP" name="lot">
+            </div>
+            <label class="sr-only" for="inlineFormInputGroupUsername2">Cantitate</label>
+            <div class="input-group mb-2 mr-sm-2">
+                <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Cantitate" name="cant">
+            </div>
+            <div class="input-group mr-sm-2">
+                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <hr>
+        {% if nescanate %}
+            <h3 align="center">Coduri neprocesate</h3>
+            <table class="table" style="text-align: center">
+                <thead>
+                    <th>COD OE</th>
+                    <th>Descriere</th>
+                    <th>COD SAP</th>
+                    <th>Lot</th>
+                    <th>Cantitate</th>
+                    <th>UM</th>
+                </thead>
+                <tbody>
+                    {% for row in nescanate %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                            <td>{{ row[4] }}</td>
+                            <td>{{ row[5] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        <hr>
+        {% if scanate %}
+            <h3 align="center">Coduri procesate</h3>
+            <table class="table" style="text-align: center">
+                <thead>
+                    <th>COD OE</th>
+                    <th>Descriere</th>
+                    <th>COD SAP</th>
+                    <th>Lot</th>
+                    <th>Cantitate</th>
+                    <th>UM</th>
+                </thead>
+                <tbody>
+                    {% for row in scanate %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td>{{ row[1] }}</td>
+                            <td>{{ row[2] }}</td>
+                            <td>{{ row[3] }}</td>
+                            <td>{{ row[4] }}</td>
+                            <td>{{ row[5] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock content %}

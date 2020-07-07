@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Cauta NIR
+{% endblock %}
+
+{% block content %}
+    <h3>Introduceti numarul NIR-ului</h3>
+    <div class="container">
+        <form action="{{ url_for('nir_search') }}" method="POST" class="form-inline justify-content-left">
+            <label class="sr-only" for="inlineFormInputName2">NIR</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Numar NIR" name="numar_nir">
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </form>
+    </div>
+    <div class="container">
+        {% if mesaj %}
+            <h4>{{ mesaj }}</h4>
+        {% endif %}
+    </div>
+    {% if numar_nir %}
+        <div class="container">
+            <h6>Apasa <a href="{{ url_for('scanare', fila=numar_nir) }}">aici</a> pentru a procesa acest NIR.</h6>
+        </div>
+    {% endif %}
+{% endblock %}

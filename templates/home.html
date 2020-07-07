@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Incarca NIR nou</h4>
+            <form method="POST" action="{{ url_for('home') }}" enctype="multipart/form-data">
+                {% if mesaj %}
+                    <h4>{{ mesaj }}</h4>
+                {% endif %}
+                <input type="file" name="fisier">
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+        {% if tables %}
+            <div class="col-md-6">
+                <h4>Ultimele 10 NIR-uri inregistrate</h4>
+                    <ul>
+                        {% for table in tables %}
+                            <a href="{{ url_for('scanare', fila=table) }}"><li>{{ table }}</li></a>
+                        {% endfor %}
+                    </ul>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}  
